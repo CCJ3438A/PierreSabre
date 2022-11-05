@@ -30,7 +30,7 @@ public class Humain {
 	}
 
 	public void boire() { // dit : Ahhh, un bon verre de (boisson) ! GLOUPS !
-		parler("Ahhh, un bon verre de " + this.boisson + " ! GLOUPS ! ");
+		parler("Mmmm, un bon verre de " + this.boisson + " ! GLOUPS ! ");
 	}
 
 	public void parler(String texte) { // affiche : (nom de l’humain) - texte
