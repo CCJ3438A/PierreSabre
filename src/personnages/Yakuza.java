@@ -43,4 +43,10 @@ public class Yakuza extends Humain {
 		return this.reputation;
 	}
 
+	@Override
+	public void direBonjour() { // fait appel à direBonjour de la classe mère et dit son clan
+		super.direBonjour();
+		parler("Mon clan est celui de " + this.clan + ".");
+	}
+
 }
