@@ -5,7 +5,7 @@ public class Humain {
 	private String boisson;
 	private int argent;
 	protected int nbConnaissance;
-	protected Humain[] memoire = new Humain[3];
+	protected Humain[] memoire = new Humain[30];
 
 	/**
 	 * @param argent
