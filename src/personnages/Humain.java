@@ -4,6 +4,8 @@ public class Humain {
 	private String nom;
 	private String boisson;
 	private int argent;
+	protected int nbConnaissance;
+	protected Humain[] memoire = new Humain[3];
 
 	/**
 	 * @param argent
@@ -15,14 +17,15 @@ public class Humain {
 		this.nom = nom;
 		this.boisson = boisson;
 		this.argent = argent;
+		this.nbConnaissance = 0;
 	}
 
-	public void gagnerArgent(int gain) {
-		this.argent += gain;
+	protected void gagnerArgent(int sommeGannee) {
+		this.argent += sommeGannee;
 	}
 
-	public void perdreArgent(int perte) {
-		this.argent -= perte;
+	protected void perdreArgent(int sommePerdue) {
+		this.argent -= sommePerdue;
 	}
 
 	public void direBonjour() { // dit : Bonjour ! Je m’appelle (nom de l’humain) et j’aime boire du (boisson))
@@ -33,7 +36,7 @@ public class Humain {
 		parler("Mmmm, un bon verre de " + this.boisson + " ! GLOUPS ! ");
 	}
 
-	public void parler(String texte) { // affiche : (nom de l’humain) - texte
+	protected void parler(String texte) { // affiche : (nom de l’humain) - texte
 		System.out.println("(" + this.nom + ") " + texte);
 	}
 
@@ -41,9 +44,10 @@ public class Humain {
 		if (this.argent >= prix) {
 			parler("J'ai " + this.argent + " sous en poche. Je vais pouvoir m'offrir " + bien + " à " + prix + " sous");
 			this.perdreArgent(prix);
+		} else {
+			parler("Je n'ai plus que " + this.argent + " sous en poche. Je ne peux même pas m'offrir un " + bien + " à"
+					+ prix + " sous.");
 		}
-		parler("Je n'ai plus que " + this.argent + " sous en poche. Je ne peux même pas m'offrir un " + bien + " à"
-				+ prix + " sous.");
 	}
 
 	public int getArgent() {
@@ -54,4 +58,34 @@ public class Humain {
 		return this.nom;
 	}
 
+	private void memoriser(Humain humainAMemoriser) {
+		if (this.nbConnaissance < this.memoire.length) {
+			this.memoire[this.nbConnaissance] = humainAMemoriser;
+			this.nbConnaissance++;
+		} else {
+			this.memoire[0] = humainAMemoriser;
+		}
+	}
+
+	private void repondre(Humain humainARep) {
+		this.direBonjour();
+		this.memoriser(humainARep);
+	}
+
+	public void faireConnaissanceAvec(Humain autreHumain) {
+		this.direBonjour();
+		autreHumain.repondre(this);
+		this.memoriser(autreHumain);
+	}
+
+	public void listerConnaissance() {
+		String texte = "";
+		for (int i = 0; i < this.nbConnaissance; i++) {
+			texte += this.memoire[i].getNom();
+			if (i < this.nbConnaissance - 1) {
+				texte += ", ";
+			}
+		}
+		this.parler("Je connais beaucoup de monde dont : " + texte);
+	}
 }
