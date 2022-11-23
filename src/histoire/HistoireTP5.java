@@ -28,7 +28,6 @@ public class HistoireTP5 {
 		masako.direBonjour();
 
 		masako.ranconner(kumi);
-
 		masako.faireConnaissanceAvec(yaku);
 
 		masako.faireLeGentil();
